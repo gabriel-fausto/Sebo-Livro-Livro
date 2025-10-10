@@ -97,7 +97,7 @@ O projeto utiliza uma paleta de cores cuidadosamente escolhida:
 │   ├── images/            # Imagens do projeto
 │   └── icons/             # Ícones
 └── img/
-    └── logo.svg           # Logo do projeto
+    └── logo.png           # Logo do projeto
 ```
 
 ## 🚀 Como Usar
