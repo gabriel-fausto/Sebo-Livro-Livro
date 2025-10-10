@@ -23,28 +23,13 @@
   gap: var(--space-4);
 }
 
-.header-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  text-decoration: none;
-  color: var(--color-white);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-}
-
 .header-logo img {
   height: 40px;
   width: auto;
 }
 
 .header-logo:hover {
-  color: var(--color-white);
   opacity: 0.9;
-}
-
-.header-logo:focus {
-  outline-color: var(--color-white);
 }
 
 /* Navigation */
@@ -117,7 +102,7 @@
   .header-nav {
     display: block;
   }
-  
+
   .mobile-menu-toggle {
     display: none;
   }
@@ -279,7 +264,7 @@
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .sm\:grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -289,11 +274,11 @@
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .md\:grid-cols-4 {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -303,11 +288,11 @@
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .lg\:grid-cols-5 {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -497,17 +482,44 @@
   text-align: right;
 }
 
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
-.mt-8 { margin-top: var(--space-8); }
+.mt-4 {
+  margin-top: var(--space-4);
+}
 
-.mb-4 { margin-bottom: var(--space-4); }
-.mb-6 { margin-bottom: var(--space-6); }
-.mb-8 { margin-bottom: var(--space-8); }
+.mt-6 {
+  margin-top: var(--space-6);
+}
 
-.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
-.py-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
-.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+.mt-8 {
+  margin-top: var(--space-8);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-4);
+}
+
+.mb-6 {
+  margin-bottom: var(--space-6);
+}
+
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+
+.py-4 {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.py-6 {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+.py-8 {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
 
 .flex {
   display: flex;
@@ -525,6 +537,14 @@
   justify-content: space-between;
 }
 
-.gap-2 { gap: var(--space-2); }
-.gap-4 { gap: var(--space-4); }
-.gap-6 { gap: var(--space-6); }
+.gap-2 {
+  gap: var(--space-2);
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+.gap-6 {
+  gap: var(--space-6);
+}
