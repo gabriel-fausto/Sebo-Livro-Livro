@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Livro&Livro - Plataforma de troca e doação de livros. Compartilhe conhecimento, doe livros e encontre novas leituras.">
+  <meta name="description"
+    content="Livro&Livro - Plataforma de troca e doação de livros. Compartilhe conhecimento, doe livros e encontre novas leituras.">
   <meta name="keywords" content="troca de livros, doação de livros, sebo online, livros usados, literatura">
   <meta name="author" content="Livro&Livro">
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gabriel-fausto.github.io/Sebo-Livro-Livro/">
   <meta property="og:title" content="Livro&Livro - Troca e Doação de Livros">
-  <meta property="og:description" content="Compartilhe conhecimento através da troca e doação de livros. Encontre sua próxima leitura!">
+  <meta property="og:description"
+    content="Compartilhe conhecimento através da troca e doação de livros. Encontre sua próxima leitura!">
   <meta property="og:image" content="https://gabriel-fausto.github.io/Sebo-Livro-Livro/img/logo.svg">
-  
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://gabriel-fausto.github.io/Sebo-Livro-Livro/">
   <meta property="twitter:title" content="Livro&Livro - Troca e Doação de Livros">
-  <meta property="twitter:description" content="Compartilhe conhecimento através da troca e doação de livros. Encontre sua próxima leitura!">
-  
+  <meta property="twitter:description"
+    content="Compartilhe conhecimento através da troca e doação de livros. Encontre sua próxima leitura!">
+
   <title>Livro&Livro - Troca e Doação de Livros</title>
-  
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
 </head>
+
 <body>
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="skip-to-main">Pular para o conteúdo principal</a>
-  
+
   <!-- Header -->
   <header class="header" role="banner">
     <div class="header-container">
       <a href="/" class="header-logo" aria-label="Livro&Livro - Página inicial">
         <img src="img/logo.svg" alt="Livro&Livro" width="40" height="40">
-        <span>Livro&Livro</span>
       </a>
-      
+
       <nav class="header-nav" role="navigation" aria-label="Navegação principal">
         <ul class="header-nav-list">
           <li><a href="/" class="header-nav-link active">Início</a></li>
@@ -47,19 +52,20 @@
           <li><a href="#contato" class="header-nav-link">Contato</a></li>
         </ul>
       </nav>
-      
+
       <div class="header-actions">
-        <a href="auth/login.html" class="btn btn-secondary">Entrar</a>
-        <a href="auth/cadastro.html" class="btn btn-accent">Cadastrar</a>
+        <a href="/auth/login.html" class="btn btn-secondary">Entrar</a>
+        <a href="/auth/cadastro.html" class="btn btn-accent">Cadastrar</a>
       </div>
-      
+
       <button class="mobile-menu-toggle" aria-label="Menu de navegação" aria-expanded="false" id="mobile-menu-toggle">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 12h18M3 6h18M3 18h18"/>
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 12h18M3 6h18M3 18h18" />
         </svg>
       </button>
     </div>
-    
+
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Navegação móvel">
       <ul class="mobile-nav-list">
@@ -72,7 +78,7 @@
       </ul>
     </nav>
   </header>
-  
+
   <!-- Main Content -->
   <main id="main-content" role="main">
     <!-- Hero Section -->
@@ -86,13 +92,13 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Categories Section -->
     <section class="section" aria-labelledby="categories-title">
       <div class="container">
         <h2 id="categories-title" class="section-title">Explore por Categoria</h2>
         <p class="section-subtitle">Encontre livros do seu gênero favorito</p>
-        
+
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <a href="categorias/?categoria=ficcao" class="card">
             <div class="card-body text-center">
@@ -101,7 +107,7 @@
               <p class="book-card-author">Romances e histórias</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=nao-ficcao" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">📖</div>
@@ -109,7 +115,7 @@
               <p class="book-card-author">Conhecimento real</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=tecnico" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">💻</div>
@@ -117,7 +123,7 @@
               <p class="book-card-author">Tecnologia e ciência</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=autoajuda" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">🌟</div>
@@ -125,7 +131,7 @@
               <p class="book-card-author">Desenvolvimento pessoal</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=infantil" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">🎨</div>
@@ -133,7 +139,7 @@
               <p class="book-card-author">Para os pequenos</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=academico" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">🎓</div>
@@ -141,7 +147,7 @@
               <p class="book-card-author">Estudos e pesquisa</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=biografia" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">👤</div>
@@ -149,7 +155,7 @@
               <p class="book-card-author">Histórias de vida</p>
             </div>
           </a>
-          
+
           <a href="categorias/?categoria=outros" class="card">
             <div class="card-body text-center">
               <div class="category-icon" aria-hidden="true">📚</div>
@@ -160,17 +166,18 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Featured Books Section -->
     <section class="section" style="background-color: var(--color-gray-light);" aria-labelledby="featured-title">
       <div class="container">
         <h2 id="featured-title" class="section-title">Livros em Destaque</h2>
         <p class="section-subtitle">Novos livros adicionados recentemente</p>
-        
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <!-- Book Card Example (will be populated dynamically) -->
           <div class="card book-card">
-            <img src="https://via.placeholder.com/300x400?text=Livro+1" alt="Capa do livro" class="book-card-image" loading="lazy">
+            <img src="https://via.placeholder.com/300x400?text=Livro+1" alt="Capa do livro" class="book-card-image"
+              loading="lazy">
             <div class="book-card-content">
               <h3 class="book-card-title">Título do Livro</h3>
               <p class="book-card-author">Autor do Livro</p>
@@ -180,9 +187,10 @@
               </div>
             </div>
           </div>
-          
+
           <div class="card book-card">
-            <img src="https://via.placeholder.com/300x400?text=Livro+2" alt="Capa do livro" class="book-card-image" loading="lazy">
+            <img src="https://via.placeholder.com/300x400?text=Livro+2" alt="Capa do livro" class="book-card-image"
+              loading="lazy">
             <div class="book-card-content">
               <h3 class="book-card-title">Título do Livro</h3>
               <p class="book-card-author">Autor do Livro</p>
@@ -192,9 +200,10 @@
               </div>
             </div>
           </div>
-          
+
           <div class="card book-card">
-            <img src="https://via.placeholder.com/300x400?text=Livro+3" alt="Capa do livro" class="book-card-image" loading="lazy">
+            <img src="https://via.placeholder.com/300x400?text=Livro+3" alt="Capa do livro" class="book-card-image"
+              loading="lazy">
             <div class="book-card-content">
               <h3 class="book-card-title">Título do Livro</h3>
               <p class="book-card-author">Autor do Livro</p>
@@ -204,9 +213,10 @@
               </div>
             </div>
           </div>
-          
+
           <div class="card book-card">
-            <img src="https://via.placeholder.com/300x400?text=Livro+4" alt="Capa do livro" class="book-card-image" loading="lazy">
+            <img src="https://via.placeholder.com/300x400?text=Livro+4" alt="Capa do livro" class="book-card-image"
+              loading="lazy">
             <div class="book-card-content">
               <h3 class="book-card-title">Título do Livro</h3>
               <p class="book-card-author">Autor do Livro</p>
@@ -217,32 +227,32 @@
             </div>
           </div>
         </div>
-        
+
         <div class="text-center mt-8">
           <a href="categorias/" class="btn btn-primary btn-lg">Ver Todos os Livros</a>
         </div>
       </div>
     </section>
-    
+
     <!-- How it Works Section -->
     <section class="section" aria-labelledby="how-it-works-title">
       <div class="container">
         <h2 id="how-it-works-title" class="section-title">Como Funciona</h2>
         <p class="section-subtitle">É simples e rápido</p>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-3">
           <div class="text-center">
             <div style="font-size: 3rem; margin-bottom: var(--space-4);" aria-hidden="true">📝</div>
             <h3 class="book-card-title">1. Cadastre-se</h3>
             <p class="book-card-author">Crie sua conta gratuitamente e comece a explorar</p>
           </div>
-          
+
           <div class="text-center">
             <div style="font-size: 3rem; margin-bottom: var(--space-4);" aria-hidden="true">📚</div>
             <h3 class="book-card-title">2. Encontre Livros</h3>
             <p class="book-card-author">Navegue pelo catálogo e escolha seus livros</p>
           </div>
-          
+
           <div class="text-center">
             <div style="font-size: 3rem; margin-bottom: var(--space-4);" aria-hidden="true">📦</div>
             <h3 class="book-card-title">3. Receba em Casa</h3>
@@ -252,7 +262,7 @@
       </div>
     </section>
   </main>
-  
+
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <div class="footer-container">
@@ -261,7 +271,7 @@
           <h3 class="footer-section-title">Livro&Livro</h3>
           <p>Compartilhando conhecimento através da troca e doação de livros.</p>
         </div>
-        
+
         <div>
           <h3 class="footer-section-title">Links Rápidos</h3>
           <ul class="footer-links">
@@ -271,7 +281,7 @@
             <li><a href="auth/login.html">Entrar</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h3 class="footer-section-title">Ajuda</h3>
           <ul class="footer-links">
@@ -281,7 +291,7 @@
             <li><a href="#suporte">Suporte</a></li>
           </ul>
         </div>
-        
+
         <div>
           <h3 class="footer-section-title">Legal</h3>
           <ul class="footer-links">
@@ -291,19 +301,20 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; 2024 Livro&Livro. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
-  
+
   <!-- Cookie Consent Banner -->
-  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description" style="display: none;">
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-labelledby="cookie-title"
+    aria-describedby="cookie-description" style="display: none;">
     <div class="cookie-content">
       <h3 id="cookie-title" class="cookie-title">Este site usa cookies</h3>
       <p id="cookie-description" class="cookie-description">
-        Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa 
+        Usamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa
         <a href="politicas/cookies.html">Política de Cookies</a>.
       </p>
       <div class="cookie-actions">
@@ -312,8 +323,9 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Scripts -->
   <script src="js/main.js" type="module"></script>
 </body>
+
 </html>
