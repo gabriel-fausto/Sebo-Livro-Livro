@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Cadastre-se no Livro&Livro para trocar e doar livros.">
   <title>Cadastro - Livro&Livro</title>
-  
+
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/pages.css">
+  <base href="https://gabriel-fausto.github.io/Sebo-Livro-Livro/">
 </head>
+
 <body>
   <a href="#main-content" class="skip-to-main">Pular para o conteúdo principal</a>
-  
+
   <header class="header" role="banner">
     <div class="header-container">
       <a href="/" class="header-logo" aria-label="Livro&Livro - Página inicial">
         <img src="../img/logo.svg" alt="Livro&Livro" width="40" height="40">
         <span>Livro&Livro</span>
       </a>
-      
+
       <nav class="header-nav" role="navigation" aria-label="Navegação principal">
         <ul class="header-nav-list">
           <li><a href="/" class="header-nav-link">Início</a></li>
@@ -29,7 +32,7 @@
       </nav>
     </div>
   </header>
-  
+
   <main id="main-content" role="main">
     <div class="auth-container">
       <div class="auth-card" style="max-width: 600px;">
@@ -40,118 +43,65 @@
           <h1 class="auth-title">Criar Conta</h1>
           <p class="auth-subtitle">Preencha seus dados para começar</p>
         </div>
-        
+
         <form id="register-form" class="auth-form" novalidate>
           <!-- Personal Information -->
           <h2 style="font-size: var(--font-size-lg); margin-bottom: var(--space-4);">Dados Pessoais</h2>
-          
+
           <div class="form-group">
             <label for="name" class="form-label form-label-required">Nome Completo</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
-              class="form-input" 
-              placeholder="Seu nome completo"
-              required
-              autocomplete="name"
-              aria-describedby="name-error"
-            >
+            <input type="text" id="name" name="name" class="form-input" placeholder="Seu nome completo" required
+              autocomplete="name" aria-describedby="name-error">
             <span id="name-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="form-group">
               <label for="cpf" class="form-label form-label-required">CPF</label>
-              <input 
-                type="text" 
-                id="cpf" 
-                name="cpf" 
-                class="form-input" 
-                placeholder="000.000.000-00"
-                required
-                maxlength="14"
-                aria-describedby="cpf-error"
-              >
+              <input type="text" id="cpf" name="cpf" class="form-input" placeholder="000.000.000-00" required
+                maxlength="14" aria-describedby="cpf-error">
               <span id="cpf-error" class="form-error" role="alert"></span>
             </div>
-            
+
             <div class="form-group">
               <label for="birthDate" class="form-label form-label-required">Data de Nascimento</label>
-              <input 
-                type="date" 
-                id="birthDate" 
-                name="birthDate" 
-                class="form-input" 
-                required
-                aria-describedby="birthDate-error"
-              >
+              <input type="date" id="birthDate" name="birthDate" class="form-input" required
+                aria-describedby="birthDate-error">
               <span id="birthDate-error" class="form-error" role="alert"></span>
               <span class="form-help">Você deve ter 18 anos ou mais</span>
             </div>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="form-group">
               <label for="email" class="form-label form-label-required">E-mail</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                class="form-input" 
-                placeholder="seu@email.com"
-                required
-                autocomplete="email"
-                aria-describedby="email-error"
-              >
+              <input type="email" id="email" name="email" class="form-input" placeholder="seu@email.com" required
+                autocomplete="email" aria-describedby="email-error">
               <span id="email-error" class="form-error" role="alert"></span>
             </div>
-            
+
             <div class="form-group">
               <label for="phone" class="form-label form-label-required">Telefone</label>
-              <input 
-                type="tel" 
-                id="phone" 
-                name="phone" 
-                class="form-input" 
-                placeholder="(00) 00000-0000"
-                required
-                maxlength="15"
-                autocomplete="tel"
-                aria-describedby="phone-error"
-              >
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="(00) 00000-0000" required
+                maxlength="15" autocomplete="tel" aria-describedby="phone-error">
               <span id="phone-error" class="form-error" role="alert"></span>
             </div>
           </div>
-          
+
           <!-- Address -->
           <h2 style="font-size: var(--font-size-lg); margin: var(--space-6) 0 var(--space-4);">Endereço</h2>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="form-group">
               <label for="cep" class="form-label form-label-required">CEP</label>
-              <input 
-                type="text" 
-                id="cep" 
-                name="cep" 
-                class="form-input" 
-                placeholder="00000-000"
-                required
-                maxlength="9"
-                aria-describedby="cep-error"
-              >
+              <input type="text" id="cep" name="cep" class="form-input" placeholder="00000-000" required maxlength="9"
+                aria-describedby="cep-error">
               <span id="cep-error" class="form-error" role="alert"></span>
             </div>
-            
+
             <div class="form-group">
               <label for="state" class="form-label form-label-required">Estado</label>
-              <select 
-                id="state" 
-                name="state" 
-                class="form-select" 
-                required
-                aria-describedby="state-error"
-              >
+              <select id="state" name="state" class="form-select" required aria-describedby="state-error">
                 <option value="">Selecione</option>
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
@@ -184,119 +134,86 @@
               <span id="state-error" class="form-error" role="alert"></span>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label for="city" class="form-label form-label-required">Cidade</label>
-            <input 
-              type="text" 
-              id="city" 
-              name="city" 
-              class="form-input" 
-              placeholder="Sua cidade"
-              required
-              aria-describedby="city-error"
-            >
+            <input type="text" id="city" name="city" class="form-input" placeholder="Sua cidade" required
+              aria-describedby="city-error">
             <span id="city-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <div class="form-group">
             <label for="street" class="form-label form-label-required">Rua/Avenida</label>
-            <input 
-              type="text" 
-              id="street" 
-              name="street" 
-              class="form-input" 
-              placeholder="Nome da rua"
-              required
-              aria-describedby="street-error"
-            >
+            <input type="text" id="street" name="street" class="form-input" placeholder="Nome da rua" required
+              aria-describedby="street-error">
             <span id="street-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="form-group">
               <label for="number" class="form-label form-label-required">Número</label>
-              <input 
-                type="text" 
-                id="number" 
-                name="number" 
-                class="form-input" 
-                placeholder="Nº"
-                required
-                aria-describedby="number-error"
-              >
+              <input type="text" id="number" name="number" class="form-input" placeholder="Nº" required
+                aria-describedby="number-error">
               <span id="number-error" class="form-error" role="alert"></span>
             </div>
-            
+
             <div class="form-group">
               <label for="complement" class="form-label">Complemento</label>
-              <input 
-                type="text" 
-                id="complement" 
-                name="complement" 
-                class="form-input" 
-                placeholder="Apto, bloco, etc."
-              >
+              <input type="text" id="complement" name="complement" class="form-input" placeholder="Apto, bloco, etc.">
             </div>
           </div>
-          
+
           <div class="form-group">
             <label for="neighborhood" class="form-label form-label-required">Bairro</label>
-            <input 
-              type="text" 
-              id="neighborhood" 
-              name="neighborhood" 
-              class="form-input" 
-              placeholder="Seu bairro"
-              required
-              aria-describedby="neighborhood-error"
-            >
+            <input type="text" id="neighborhood" name="neighborhood" class="form-input" placeholder="Seu bairro"
+              required aria-describedby="neighborhood-error">
             <span id="neighborhood-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <!-- Literary Preferences -->
-          <h2 style="font-size: var(--font-size-lg); margin: var(--space-6) 0 var(--space-4);">Preferências Literárias</h2>
-          
+          <h2 style="font-size: var(--font-size-lg); margin: var(--space-6) 0 var(--space-4);">Preferências Literárias
+          </h2>
+
           <div class="form-group">
             <label class="form-label form-label-required">Gêneros de Interesse</label>
             <p class="form-help" style="margin-bottom: var(--space-3);">Selecione pelo menos um gênero</p>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2">
               <div class="form-check">
                 <input type="checkbox" id="genre-fiction" name="genres" value="ficcao" class="form-check-input">
                 <label for="genre-fiction" class="form-check-label">Ficção</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-nonfiction" name="genres" value="nao-ficcao" class="form-check-input">
                 <label for="genre-nonfiction" class="form-check-label">Não-Ficção</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-technical" name="genres" value="tecnico" class="form-check-input">
                 <label for="genre-technical" class="form-check-label">Técnico</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-selfhelp" name="genres" value="autoajuda" class="form-check-input">
                 <label for="genre-selfhelp" class="form-check-label">Autoajuda</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-children" name="genres" value="infantil" class="form-check-input">
                 <label for="genre-children" class="form-check-label">Infantil</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-academic" name="genres" value="academico" class="form-check-input">
                 <label for="genre-academic" class="form-check-label">Acadêmico</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-biography" name="genres" value="biografia" class="form-check-input">
                 <label for="genre-biography" class="form-check-label">Biografia</label>
               </div>
-              
+
               <div class="form-check">
                 <input type="checkbox" id="genre-other" name="genres" value="outros" class="form-check-input">
                 <label for="genre-other" class="form-check-label">Outros</label>
@@ -304,75 +221,55 @@
             </div>
             <span id="genres-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <!-- Password -->
           <h2 style="font-size: var(--font-size-lg); margin: var(--space-6) 0 var(--space-4);">Segurança</h2>
-          
+
           <div class="form-group">
             <label for="password" class="form-label form-label-required">Senha</label>
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              class="form-input" 
-              placeholder="Mínimo 8 caracteres"
-              required
-              autocomplete="new-password"
-              aria-describedby="password-error password-help"
-            >
+            <input type="password" id="password" name="password" class="form-input" placeholder="Mínimo 8 caracteres"
+              required autocomplete="new-password" aria-describedby="password-error password-help">
             <div id="password-strength" class="password-strength">
               <div id="password-strength-bar" class="password-strength-bar"></div>
             </div>
-            <span id="password-help" class="form-help">Use letras maiúsculas, minúsculas, números e caracteres especiais</span>
+            <span id="password-help" class="form-help">Use letras maiúsculas, minúsculas, números e caracteres
+              especiais</span>
             <span id="password-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <div class="form-group">
             <label for="confirmPassword" class="form-label form-label-required">Confirmar Senha</label>
-            <input 
-              type="password" 
-              id="confirmPassword" 
-              name="confirmPassword" 
-              class="form-input" 
-              placeholder="Digite a senha novamente"
-              required
-              autocomplete="new-password"
-              aria-describedby="confirmPassword-error"
-            >
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input"
+              placeholder="Digite a senha novamente" required autocomplete="new-password"
+              aria-describedby="confirmPassword-error">
             <span id="confirmPassword-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <!-- Terms and Conditions -->
           <div class="form-group">
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                id="terms" 
-                name="terms" 
-                class="form-check-input"
-                required
-                aria-describedby="terms-error"
-              >
+              <input type="checkbox" id="terms" name="terms" class="form-check-input" required
+                aria-describedby="terms-error">
               <label for="terms" class="form-check-label">
-                Aceito os <a href="../politicas/termos.html" target="_blank">Termos de Uso</a> e a 
+                Aceito os <a href="../politicas/termos.html" target="_blank">Termos de Uso</a> e a
                 <a href="../politicas/privacidade.html" target="_blank">Política de Privacidade</a>
               </label>
             </div>
             <span id="terms-error" class="form-error" role="alert"></span>
           </div>
-          
+
           <button type="submit" class="btn btn-primary btn-block btn-lg">
             Criar Conta
           </button>
         </form>
-        
+
         <div class="auth-footer">
           <p>Já tem uma conta? <a href="login.html" class="auth-link">Entrar</a></p>
         </div>
       </div>
     </div>
   </main>
-  
+
   <footer class="footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-bottom">
@@ -380,7 +277,8 @@
       </div>
     </div>
   </footer>
-  
+
   <script type="module" src="../js/ui/pages/register.js"></script>
 </body>
+
 </html>
