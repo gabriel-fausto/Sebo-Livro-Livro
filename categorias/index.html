@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore nosso catálogo de livros para troca e doação.">
+  <title>Catálogo - Livro&Livro</title>
+  
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-to-main">Pular para o conteúdo principal</a>
+  
+  <header class="header" role="banner">
+    <div class="header-container">
+      <a href="/" class="header-logo" aria-label="Livro&Livro - Página inicial">
+        <img src="../img/logo.svg" alt="Livro&Livro" width="40" height="40">
+        <span>Livro&Livro</span>
+      </a>
+      
+      <nav class="header-nav" role="navigation" aria-label="Navegação principal">
+        <ul class="header-nav-list">
+          <li><a href="/" class="header-nav-link">Início</a></li>
+          <li><a href="/categorias/" class="header-nav-link active">Catálogo</a></li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <a href="/auth/login.html" class="btn btn-secondary">Entrar</a>
+        <a href="/auth/cadastro.html" class="btn btn-accent">Cadastrar</a>
+      </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Menu de navegação" aria-expanded="false" id="mobile-menu-toggle">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+    
+    <nav class="mobile-nav" id="mobile-nav">
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item"><a href="/" class="mobile-nav-link">Início</a></li>
+        <li class="mobile-nav-item"><a href="/categorias/" class="mobile-nav-link">Catálogo</a></li>
+        <li class="mobile-nav-item"><a href="/auth/login.html" class="mobile-nav-link">Entrar</a></li>
+        <li class="mobile-nav-item"><a href="/auth/cadastro.html" class="mobile-nav-link">Cadastrar</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main id="main-content" role="main">
+    <div class="catalog-header">
+      <div class="container">
+        <h1 id="catalog-title" class="catalog-title">Catálogo de Livros</h1>
+        <p>Encontre sua próxima leitura</p>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="section">
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input 
+            type="search" 
+            id="search-input"
+            class="search-input" 
+            placeholder="Buscar por título, autor ou ISBN..."
+            aria-label="Buscar livros"
+          >
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="category-filter" role="group" aria-label="Filtrar por categoria">
+          <button class="category-chip active" data-category="todos">Todos</button>
+          <button class="category-chip" data-category="ficcao">Ficção</button>
+          <button class="category-chip" data-category="nao-ficcao">Não-Ficção</button>
+          <button class="category-chip" data-category="tecnico">Técnico</button>
+          <button class="category-chip" data-category="autoajuda">Autoajuda</button>
+          <button class="category-chip" data-category="infantil">Infantil</button>
+          <button class="category-chip" data-category="academico">Acadêmico</button>
+          <button class="category-chip" data-category="biografia">Biografia</button>
+          <button class="category-chip" data-category="outros">Outros</button>
+        </div>
+        
+        <!-- Sidebar Layout -->
+        <div class="sidebar-layout">
+          <!-- Filters Sidebar -->
+          <aside class="sidebar" aria-labelledby="filters-title">
+            <h2 id="filters-title" class="sidebar-title">Filtros</h2>
+            
+            <div class="catalog-filters">
+              <div class="filter-group">
+                <h3 class="filter-title">Estado do Livro</h3>
+                <div class="filter-options">
+                  <div class="form-check">
+                    <input type="checkbox" id="condition-new" name="condition" value="novo" class="form-check-input">
+                    <label for="condition-new" class="form-check-label">Novo</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="condition-excellent" name="condition" value="otimo" class="form-check-input">
+                    <label for="condition-excellent" class="form-check-label">Ótimo Estado</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="condition-good" name="condition" value="bom" class="form-check-input">
+                    <label for="condition-good" class="form-check-label">Bom Estado</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="condition-fair" name="condition" value="regular" class="form-check-input">
+                    <label for="condition-fair" class="form-check-label">Estado Regular</label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="filter-group">
+                <h3 class="filter-title">Tipo</h3>
+                <div class="filter-options">
+                  <div class="form-check">
+                    <input type="checkbox" id="type-donation" name="type" value="doacao" class="form-check-input">
+                    <label for="type-donation" class="form-check-label">Doação</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" id="type-exchange" name="type" value="troca" class="form-check-input">
+                    <label for="type-exchange" class="form-check-label">Troca</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button id="clear-filters" class="btn btn-outline btn-block">Limpar Filtros</button>
+          </aside>
+          
+          <!-- Main Content -->
+          <div>
+            <!-- Sort Controls -->
+            <div class="sort-controls">
+              <p class="result-count" id="result-count">Mostrando 0 livros</p>
+              <select id="sort-select" class="sort-select" aria-label="Ordenar livros">
+                <option value="recent">Mais Recentes</option>
+                <option value="title-asc">Título (A-Z)</option>
+                <option value="title-desc">Título (Z-A)</option>
+                <option value="author-asc">Autor (A-Z)</option>
+                <option value="author-desc">Autor (Z-A)</option>
+              </select>
+            </div>
+            
+            <!-- Books Grid -->
+            <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              <!-- Books will be loaded dynamically -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+              <div class="empty-state-icon" aria-hidden="true">📚</div>
+              <h2 class="empty-state-title">Nenhum livro encontrado</h2>
+              <p class="empty-state-description">Tente ajustar seus filtros ou busque por outro termo.</p>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loading-state" class="empty-state">
+              <div class="spinner spinner-lg"></div>
+              <p class="empty-state-description">Carregando livros...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div>
+          <h3 class="footer-section-title">Livro&Livro</h3>
+          <p>Compartilhando conhecimento através da troca e doação de livros.</p>
+        </div>
+        
+        <div>
+          <h3 class="footer-section-title">Links Rápidos</h3>
+          <ul class="footer-links">
+            <li><a href="/">Início</a></li>
+            <li><a href="/categorias/">Catálogo</a></li>
+            <li><a href="/auth/cadastro.html">Cadastrar</a></li>
+            <li><a href="/auth/login.html">Entrar</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-section-title">Legal</h3>
+          <ul class="footer-links">
+            <li><a href="/politicas/termos.html">Termos de Uso</a></li>
+            <li><a href="/politicas/privacidade.html">Política de Privacidade</a></li>
+            <li><a href="/politicas/cookies.html">Política de Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Livro&Livro. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <script type="module" src="../js/ui/pages/catalog.js"></script>
+  <script type="module" src="../js/main.js"></script>
+</body>
+</html>
