@@ -56,8 +56,9 @@
 }
 
 .btn-accent:hover:not(:disabled) {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: var(--color-accent-light);
+  border-color: var(--color-accent-light);
+  color: var(--color-white);
 }
 
 .btn-outline {
@@ -84,6 +85,20 @@
 
 .btn-block {
   width: 100%;
+}
+
+/* Button Efects */
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-hover-shadow:hover:not(:disabled) {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.btn-hover-shadow:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 /* ===== FORMS ===== */
