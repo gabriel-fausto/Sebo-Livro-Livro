@@ -27,6 +27,7 @@
   from {
     transform: translateY(100%);
   }
+
   to {
     transform: translateY(0);
   }
@@ -83,6 +84,7 @@
 }
 
 .auth-card {
+  border: 1px solid #f1f1f1;
   width: 100%;
   max-width: 450px;
   background-color: var(--color-white);
