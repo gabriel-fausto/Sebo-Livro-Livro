@@ -82,7 +82,7 @@ export function getCurrentUser() {
 // Helper function to logout
 export function logout() {
   localStorage.removeItem('currentUser');
-  window.location.href = './';
+  window.location.href = '../';
 }
 
 // Update header based on login status
