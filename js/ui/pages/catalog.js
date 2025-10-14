@@ -275,7 +275,7 @@ function addToCart(bookId) {
   
   if (!currentUser) {
     alert('Você precisa estar logado para adicionar livros ao carrinho.');
-    window.location.href = '/auth/login.html';
+    window.location.href = './auth/login.html';
     return;
   }
   

@@ -174,7 +174,7 @@ form.addEventListener('submit', (e) => {
 // Logout functionality
 function logout() {
   localStorage.removeItem('currentUser');
-  window.location.href = '/';
+  window.location.href = './';
 }
 
 document.getElementById('logout-btn').addEventListener('click', logout);
