@@ -15,7 +15,7 @@ let sampleBooks = [
     description: 'Clássico da literatura brasileira',
     isbn: '9788544001097',
     createdAt: '2024-01-15',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/dom-cas.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/dom-cas.jpg')
   },
   {
     id: '2',
@@ -27,7 +27,7 @@ let sampleBooks = [
     description: 'Guia para escrever código limpo',
     isbn: '9780132350884',
     createdAt: '2024-01-20',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/clean-code.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/clean-code.jpg')
   },
   {
     id: '3',
@@ -39,7 +39,7 @@ let sampleBooks = [
     description: 'Livro infantojuvenil clássico',
     isbn: '9788595084469',
     createdAt: '2024-02-01',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/peq-pri.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/peq-pri.jpg')
   },
   {
     id: '4',
@@ -51,7 +51,7 @@ let sampleBooks = [
     description: 'Uma breve história da humanidade',
     isbn: '9788525432629',
     createdAt: '2024-02-05',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/sapiens.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/sapiens.jpg')
   },
   {
     id: '5',
@@ -63,7 +63,7 @@ let sampleBooks = [
     description: 'Por que fazemos o que fazemos',
     isbn: '9788539004119',
     createdAt: '2024-02-10',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/pod-hab.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/pod-hab.jpg')
   },
   {
     id: '6',
@@ -75,7 +75,7 @@ let sampleBooks = [
     description: 'Distopia clássica',
     isbn: '9788535914849',
     createdAt: '2024-02-12',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/1984.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/1984.jpg')
   },
   {
     id: '7',
@@ -87,7 +87,7 @@ let sampleBooks = [
     description: 'Biografia oficial',
     isbn: '9788535918199',
     createdAt: '2024-02-15',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/steve-jobs.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/steve-jobs.jpg')
   },
   {
     id: '8',
@@ -99,7 +99,7 @@ let sampleBooks = [
     description: 'Livro de referência em algoritmos',
     isbn: '9788535236996',
     createdAt: '2024-02-18',
-    image64: await getBase64Image('/sebo-livro-livro/img/livros/intro-alg.jpg')
+    image64: await getBase64Image('/sebo-livro-livro/img/intro-alg.jpg')
   }
 ];
 
