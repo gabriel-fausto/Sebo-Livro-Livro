@@ -4,7 +4,7 @@
  */
 
 // Sample books data (in a real app, this would come from a database)
-const sampleBooks = [
+let sampleBooks = [
   {
     id: '1',
     title: 'Dom Casmurro',
@@ -12,10 +12,10 @@ const sampleBooks = [
     category: 'ficcao',
     condition: 'otimo',
     type: 'doacao',
-    image: 'https://via.placeholder.com/300x400?text=Dom+Casmurro',
     description: 'Clássico da literatura brasileira',
     isbn: '9788544001097',
-    createdAt: '2024-01-15'
+    createdAt: '2024-01-15',
+    image64: await getBase64Image('/img/livros/dom-cas.jpg')
   },
   {
     id: '2',
@@ -24,10 +24,10 @@ const sampleBooks = [
     category: 'tecnico',
     condition: 'bom',
     type: 'troca',
-    image: 'https://via.placeholder.com/300x400?text=Clean+Code',
     description: 'Guia para escrever código limpo',
     isbn: '9780132350884',
-    createdAt: '2024-01-20'
+    createdAt: '2024-01-20',
+    image64: await getBase64Image('/img/livros/clean-code.jpg')
   },
   {
     id: '3',
@@ -36,10 +36,10 @@ const sampleBooks = [
     category: 'infantil',
     condition: 'novo',
     type: 'doacao',
-    image: 'https://via.placeholder.com/300x400?text=O+Pequeno+Principe',
     description: 'Livro infantojuvenil clássico',
     isbn: '9788595084469',
-    createdAt: '2024-02-01'
+    createdAt: '2024-02-01',
+    image64: await getBase64Image('/img/livros/peq-pri.jpg')
   },
   {
     id: '4',
@@ -48,10 +48,10 @@ const sampleBooks = [
     category: 'nao-ficcao',
     condition: 'otimo',
     type: 'troca',
-    image: 'https://via.placeholder.com/300x400?text=Sapiens',
     description: 'Uma breve história da humanidade',
     isbn: '9788525432629',
-    createdAt: '2024-02-05'
+    createdAt: '2024-02-05',
+    image64: await getBase64Image('/img/livros/sapiens.jpg')
   },
   {
     id: '5',
@@ -60,10 +60,10 @@ const sampleBooks = [
     category: 'autoajuda',
     condition: 'bom',
     type: 'doacao',
-    image: 'https://via.placeholder.com/300x400?text=O+Poder+do+Habito',
     description: 'Por que fazemos o que fazemos',
     isbn: '9788539004119',
-    createdAt: '2024-02-10'
+    createdAt: '2024-02-10',
+    image64: await getBase64Image('/img/livros/pod-hab.jpg')
   },
   {
     id: '6',
@@ -72,10 +72,10 @@ const sampleBooks = [
     category: 'ficcao',
     condition: 'otimo',
     type: 'troca',
-    image: 'https://via.placeholder.com/300x400?text=1984',
     description: 'Distopia clássica',
     isbn: '9788535914849',
-    createdAt: '2024-02-12'
+    createdAt: '2024-02-12',
+    image64: await getBase64Image('/img/livros/1984.jpg')
   },
   {
     id: '7',
@@ -84,10 +84,10 @@ const sampleBooks = [
     category: 'biografia',
     condition: 'bom',
     type: 'doacao',
-    image: 'https://via.placeholder.com/300x400?text=Steve+Jobs',
     description: 'Biografia oficial',
     isbn: '9788535918199',
-    createdAt: '2024-02-15'
+    createdAt: '2024-02-15',
+    image64: await getBase64Image('/img/livros/steve-jobs.jpg')
   },
   {
     id: '8',
@@ -96,12 +96,39 @@ const sampleBooks = [
     category: 'academico',
     condition: 'regular',
     type: 'troca',
-    image: 'https://via.placeholder.com/300x400?text=Algoritmos',
     description: 'Livro de referência em algoritmos',
     isbn: '9788535236996',
-    createdAt: '2024-02-18'
+    createdAt: '2024-02-18',
+    image64: await getBase64Image('/img/livros/intro-alg.jpg')
   }
 ];
+
+async function getBase64Image(imgURL) {
+    const img = await loadImage(imgURL);
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+async function loadImage(imgURL) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+
+    img.onload = () => {
+      resolve(img);
+    };
+
+    img.onerror = (error) => {
+      reject(new Error('Falha ao carregar imagem'));
+    };
+
+    img.src = imgURL;
+  });
+}
 
 // Initialize books in localStorage if empty
 function initializeBooks() {
@@ -227,7 +254,7 @@ function getConditionLabel(condition) {
 function renderBookCard(book) {
   return `
     <div class="card book-card">
-      <img src="${book.image}" alt="Capa de ${book.title}" class="book-card-image" loading="lazy">
+      <img src="data:image/png;base64, ${book.image64}" alt="Capa de ${book.title}" class="book-card-image" loading="lazy">
       <div class="book-card-content">
         <h3 class="book-card-title">${book.title}</h3>
         <p class="book-card-author">${book.author}</p>
