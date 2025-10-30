@@ -3,106 +3,6 @@
  * Livro&Livro - Book Exchange Platform
  */
 
-// Sample books data (in a real app, this would come from a database)
-let sampleBooks = [
-  {
-    id: '1',
-    title: 'Dom Casmurro',
-    author: 'Machado de Assis',
-    category: 'ficcao',
-    condition: 'otimo',
-    type: 'doacao',
-    description: 'Clássico da literatura brasileira',
-    isbn: '9788544001097',
-    createdAt: '2024-01-15',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/dom-cas.jpg')
-  },
-  {
-    id: '2',
-    title: 'Clean Code',
-    author: 'Robert C. Martin',
-    category: 'tecnico',
-    condition: 'bom',
-    type: 'troca',
-    description: 'Guia para escrever código limpo',
-    isbn: '9780132350884',
-    createdAt: '2024-01-20',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/clean-code.jpg')
-  },
-  {
-    id: '3',
-    title: 'O Pequeno Príncipe',
-    author: 'Antoine de Saint-Exupéry',
-    category: 'infantil',
-    condition: 'novo',
-    type: 'doacao',
-    description: 'Livro infantojuvenil clássico',
-    isbn: '9788595084469',
-    createdAt: '2024-02-01',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/peq-pri.jpg')
-  },
-  {
-    id: '4',
-    title: 'Sapiens',
-    author: 'Yuval Noah Harari',
-    category: 'nao-ficcao',
-    condition: 'otimo',
-    type: 'troca',
-    description: 'Uma breve história da humanidade',
-    isbn: '9788525432629',
-    createdAt: '2024-02-05',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/sapiens.jpg')
-  },
-  {
-    id: '5',
-    title: 'O Poder do Hábito',
-    author: 'Charles Duhigg',
-    category: 'autoajuda',
-    condition: 'bom',
-    type: 'doacao',
-    description: 'Por que fazemos o que fazemos',
-    isbn: '9788539004119',
-    createdAt: '2024-02-10',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/pod-hab.jpg')
-  },
-  {
-    id: '6',
-    title: '1984',
-    author: 'George Orwell',
-    category: 'ficcao',
-    condition: 'otimo',
-    type: 'troca',
-    description: 'Distopia clássica',
-    isbn: '9788535914849',
-    createdAt: '2024-02-12',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/1984.jpg')
-  },
-  {
-    id: '7',
-    title: 'Steve Jobs',
-    author: 'Walter Isaacson',
-    category: 'biografia',
-    condition: 'bom',
-    type: 'doacao',
-    description: 'Biografia oficial',
-    isbn: '9788535918199',
-    createdAt: '2024-02-15',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/steve-jobs.jpg')
-  },
-  {
-    id: '8',
-    title: 'Introdução à Algoritmos',
-    author: 'Thomas H. Cormen',
-    category: 'academico',
-    condition: 'regular',
-    type: 'troca',
-    description: 'Livro de referência em algoritmos',
-    isbn: '9788535236996',
-    createdAt: '2024-02-18',
-    image64: await getBase64Image('/Sebo-Livro-Livro/img/intro-alg.jpg')
-  }
-];
-
 async function getBase64Image(imgURL) {
     const img = await loadImage(imgURL);
     var canvas = document.createElement("canvas");
@@ -131,10 +31,14 @@ async function loadImage(imgURL) {
 }
 
 // Initialize books in localStorage if empty
-function initializeBooks() {
-  const existingBooks = localStorage.getItem('books');
-  if (!existingBooks) {
-    localStorage.setItem('books', JSON.stringify(sampleBooks));
+async function initializeBooks() {
+  const url = `https://6tq0bqkysh.execute-api.sa-east-1.amazonaws.com/dev/books`;
+    
+    // Faz a chamada na API
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+  if (dados) {
+    localStorage.setItem('books', JSON.stringify(dados));
   }
 }
 
@@ -254,7 +158,7 @@ function getConditionLabel(condition) {
 function renderBookCard(book) {
   return `
     <div class="card book-card">
-      <img src="data:image/png;base64, ${book.image64}" alt="Capa de ${book.title}" class="book-card-image" loading="lazy">
+      <img src="${book.preSignedURL}" alt="Capa de ${book.title}" class="book-card-image" loading="lazy">
       <div class="book-card-content">
         <h3 class="book-card-title">${book.title}</h3>
         <p class="book-card-author">${book.author}</p>
@@ -380,7 +284,7 @@ clearFiltersBtn.addEventListener('click', () => {
 });
 
 // Initialize
-initializeBooks();
+await initializeBooks();
 
 // Set initial category from URL
 const initialCategory = getCategoryFromURL();
