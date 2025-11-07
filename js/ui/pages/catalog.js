@@ -203,10 +203,12 @@ function renderBooks() {
 // Add to cart
 function addToCart(bookId) {
   const currentUser = localStorage.getItem('currentUser');
-  
+  const basePath = window.location.hostname.includes('github.io')
+      ? '/Sebo-Livro-Livro'
+      : '';
   if (!currentUser) {
     alert('Você precisa estar logado para adicionar livros ao carrinho.');
-    window.location.href = '/Sebo-Livro-Livro/auth/login.html';
+    window.location.href = `${basePath}/auth/login.html`;
     return;
   }
   
