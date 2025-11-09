@@ -3,17 +3,17 @@
  * Livro&Livro - Book Exchange Platform
  */
 
-import { 
-  validateCPF, 
-  formatCPF, 
-  validateEmail, 
-  validatePhone, 
-  formatPhone,
+import {
+  validateCPF,
+  formatCPF,
+  validateEmail,
+  validatephoneNumber,
+  formatphoneNumber,
   validateCEP,
   formatCEP,
   validateAge,
   validatePassword,
-  validateRequired 
+  validateRequired
 } from '../../utils/validators.js';
 
 const form = document.getElementById('register-form');
@@ -26,7 +26,7 @@ const fields = {
   cpf: document.getElementById('cpf'),
   birthDate: document.getElementById('birthDate'),
   email: document.getElementById('email'),
-  phone: document.getElementById('phone'),
+  phoneNumber: document.getElementById('phoneNumber'),
   cep: document.getElementById('cep'),
   state: document.getElementById('state'),
   city: document.getElementById('city'),
@@ -45,7 +45,7 @@ const errors = {
   cpf: document.getElementById('cpf-error'),
   birthDate: document.getElementById('birthDate-error'),
   email: document.getElementById('email-error'),
-  phone: document.getElementById('phone-error'),
+  phoneNumber: document.getElementById('phoneNumber-error'),
   cep: document.getElementById('cep-error'),
   state: document.getElementById('state-error'),
   city: document.getElementById('city-error'),
@@ -69,11 +69,11 @@ fields.cpf.addEventListener('input', (e) => {
   }
 });
 
-// Format phone as user types
-fields.phone.addEventListener('input', (e) => {
+// Format phoneNumber as user types
+fields.phoneNumber.addEventListener('input', (e) => {
   let value = e.target.value.replace(/[^\d]/g, '');
   if (value.length > 11) value = value.slice(0, 11);
-  e.target.value = formatPhone(value);
+  e.target.value = formatphoneNumber(value);
 });
 
 // Format CEP as user types
@@ -125,7 +125,7 @@ function clearErrors() {
 function validateForm() {
   clearErrors();
   let isValid = true;
-  
+
   // Validate name
   if (!validateRequired(fields.name.value)) {
     showError('name', 'Nome é obrigatório');
@@ -134,7 +134,7 @@ function validateForm() {
     showError('name', 'Nome deve ter pelo menos 3 caracteres');
     isValid = false;
   }
-  
+
   // Validate CPF
   if (!validateRequired(fields.cpf.value)) {
     showError('cpf', 'CPF é obrigatório');
@@ -143,7 +143,7 @@ function validateForm() {
     showError('cpf', 'CPF inválido');
     isValid = false;
   }
-  
+
   // Validate birth date and age
   if (!validateRequired(fields.birthDate.value)) {
     showError('birthDate', 'Data de nascimento é obrigatória');
@@ -152,7 +152,7 @@ function validateForm() {
     showError('birthDate', 'Você deve ter 18 anos ou mais');
     isValid = false;
   }
-  
+
   // Validate email
   if (!validateRequired(fields.email.value)) {
     showError('email', 'E-mail é obrigatório');
@@ -168,16 +168,16 @@ function validateForm() {
       isValid = false;
     }
   }
-  
-  // Validate phone
-  if (!validateRequired(fields.phone.value)) {
-    showError('phone', 'Telefone é obrigatório');
+
+  // Validate phoneNumber
+  if (!validateRequired(fields.phoneNumber.value)) {
+    showError('phoneNumber', 'Telefone é obrigatório');
     isValid = false;
-  } else if (!validatePhone(fields.phone.value)) {
-    showError('phone', 'Telefone inválido');
+  } else if (!validatephoneNumber(fields.phoneNumber.value)) {
+    showError('phoneNumber', 'Telefone inválido');
     isValid = false;
   }
-  
+
   // Validate CEP
   if (!validateRequired(fields.cep.value)) {
     showError('cep', 'CEP é obrigatório');
@@ -186,44 +186,44 @@ function validateForm() {
     showError('cep', 'CEP inválido');
     isValid = false;
   }
-  
+
   // Validate state
   if (!validateRequired(fields.state.value)) {
     showError('state', 'Estado é obrigatório');
     isValid = false;
   }
-  
+
   // Validate city
   if (!validateRequired(fields.city.value)) {
     showError('city', 'Cidade é obrigatória');
     isValid = false;
   }
-  
+
   // Validate street
   if (!validateRequired(fields.street.value)) {
     showError('street', 'Rua/Avenida é obrigatória');
     isValid = false;
   }
-  
+
   // Validate number
   if (!validateRequired(fields.number.value)) {
     showError('number', 'Número é obrigatório');
     isValid = false;
   }
-  
+
   // Validate neighborhood
   if (!validateRequired(fields.neighborhood.value)) {
     showError('neighborhood', 'Bairro é obrigatório');
     isValid = false;
   }
-  
+
   // Validate genres (at least one selected)
   const genreCheckboxes = document.querySelectorAll('input[name="genres"]:checked');
   if (genreCheckboxes.length === 0) {
     showError('genres', 'Selecione pelo menos um gênero de interesse');
     isValid = false;
   }
-  
+
   // Validate password
   if (!validateRequired(fields.password.value)) {
     showError('password', 'Senha é obrigatória');
@@ -235,7 +235,7 @@ function validateForm() {
       isValid = false;
     }
   }
-  
+
   // Validate confirm password
   if (!validateRequired(fields.confirmPassword.value)) {
     showError('confirmPassword', 'Confirmação de senha é obrigatória');
@@ -244,19 +244,19 @@ function validateForm() {
     showError('confirmPassword', 'As senhas não coincidem');
     isValid = false;
   }
-  
+
   // Validate terms
   if (!fields.terms.checked) {
     showError('terms', 'Você deve aceitar os Termos de Uso e Política de Privacidade');
     isValid = false;
   }
-  
+
   return isValid;
 }
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+
   if (!validateForm()) {
     // Scroll to first error
     const firstError = document.querySelector('.form-input-error, .form-select-error');
@@ -265,18 +265,18 @@ form.addEventListener('submit', (e) => {
     }
     return;
   }
-  
+
   // Collect form data
   const genreCheckboxes = document.querySelectorAll('input[name="genres"]:checked');
   const genres = Array.from(genreCheckboxes).map(cb => cb.value);
-  
+
   const userData = {
     id: Date.now().toString(),
     name: fields.name.value.trim(),
     cpf: fields.cpf.value,
     birthDate: fields.birthDate.value,
     email: fields.email.value.trim(),
-    phone: fields.phone.value,
+    phoneNumber: fields.phoneNumber.value,
     address: {
       cep: fields.cep.value,
       state: fields.state.value,
@@ -293,19 +293,19 @@ form.addEventListener('submit', (e) => {
     createdAt: new Date().toISOString(),
     isAdmin: false
   };
-  
+
   // Save to localStorage
   const users = JSON.parse(localStorage.getItem('users') || '[]');
   users.push(userData);
   localStorage.setItem('users', JSON.stringify(users));
-  
+
   // Auto login - store current user (without password)
   const { password, ...userWithoutPassword } = userData;
   localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-  
+
   // Show success message
   alert('Cadastro realizado com sucesso! Você será redirecionado para o painel.');
-  
+
   // Redirect to dashboard
   window.location.href = '../usuario/painel.html';
 });

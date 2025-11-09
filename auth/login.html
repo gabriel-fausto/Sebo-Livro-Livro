@@ -90,6 +90,7 @@
 
   <script type="module">
     import { showAlert } from '../js/main.js';
+    import { login } from '../js/services/auth-service.js';
 
     const loginForm = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
@@ -109,7 +110,7 @@
       passwordInput.classList.remove('form-input-error');
     }
 
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearErrors();
 
@@ -144,12 +145,12 @@
 
       // Simulate login (MVP - check localStorage)
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(u => u.email === email && u.password === password);
+      const user = await login(email, password);
 
       if (user) {
         // Store current user (without password)
-        const { password: _, ...userWithoutPassword } = user;
-        localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+        //const { password: _, ...userWithoutPassword } = user;
+        localStorage.setItem('currentUser', JSON.stringify(user));
 
         showAlert('Login realizado com sucesso!', 'success');
 

@@ -11,13 +11,13 @@
 export function validateCPF(cpf) {
   // Remove non-numeric characters
   cpf = cpf.replace(/[^\d]/g, '');
-  
+
   // Check if CPF has 11 digits
   if (cpf.length !== 11) return false;
-  
+
   // Check if all digits are the same
   if (/^(\d)\1{10}$/.test(cpf)) return false;
-  
+
   // Validate first check digit
   let sum = 0;
   for (let i = 0; i < 9; i++) {
@@ -26,7 +26,7 @@ export function validateCPF(cpf) {
   let checkDigit = 11 - (sum % 11);
   if (checkDigit >= 10) checkDigit = 0;
   if (checkDigit !== parseInt(cpf.charAt(9))) return false;
-  
+
   // Validate second check digit
   sum = 0;
   for (let i = 0; i < 10; i++) {
@@ -35,7 +35,7 @@ export function validateCPF(cpf) {
   checkDigit = 11 - (sum % 11);
   if (checkDigit >= 10) checkDigit = 0;
   if (checkDigit !== parseInt(cpf.charAt(10))) return false;
-  
+
   return true;
 }
 
@@ -60,29 +60,29 @@ export function validateEmail(email) {
 }
 
 /**
- * Validates phone number (Brazilian format)
- * @param {string} phone - Phone to validate
+ * Validates phoneNumber number (Brazilian format)
+ * @param {string} phoneNumber - phoneNumber to validate
  * @returns {boolean} - True if valid, false otherwise
  */
-export function validatePhone(phone) {
-  phone = phone.replace(/[^\d]/g, '');
+export function validatephoneNumber(phoneNumber) {
+  phoneNumber = phoneNumber.replace(/[^\d]/g, '');
   // Should have 10 or 11 digits (with area code)
-  return phone.length === 10 || phone.length === 11;
+  return phoneNumber.length === 10 || phoneNumber.length === 11;
 }
 
 /**
- * Formats phone with mask
- * @param {string} phone - Phone to format
- * @returns {string} - Formatted phone
+ * Formats phoneNumber with mask
+ * @param {string} phoneNumber - phoneNumber to format
+ * @returns {string} - Formatted phoneNumber
  */
-export function formatPhone(phone) {
-  phone = phone.replace(/[^\d]/g, '');
-  if (phone.length === 11) {
-    return phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-  } else if (phone.length === 10) {
-    return phone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+export function formatphoneNumber(phoneNumber) {
+  phoneNumber = phoneNumber.replace(/[^\d]/g, '');
+  if (phoneNumber.length === 11) {
+    return phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  } else if (phoneNumber.length === 10) {
+    return phoneNumber.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
   }
-  return phone;
+  return phoneNumber;
 }
 
 /**
@@ -115,11 +115,11 @@ export function validateAge(birthDate) {
   const birth = new Date(birthDate);
   let age = today.getFullYear() - birth.getFullYear();
   const monthDiff = today.getMonth() - birth.getMonth();
-  
+
   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
     age--;
   }
-  
+
   return age >= 18;
 }
 
@@ -134,18 +134,18 @@ export function validatePassword(password) {
   const hasLowerCase = /[a-z]/.test(password);
   const hasNumbers = /\d/.test(password);
   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-  
+
   let strength = 0;
   if (password.length >= minLength) strength++;
   if (hasUpperCase) strength++;
   if (hasLowerCase) strength++;
   if (hasNumbers) strength++;
   if (hasSpecialChar) strength++;
-  
+
   let strengthLabel = 'weak';
   if (strength >= 4) strengthLabel = 'strong';
   else if (strength >= 3) strengthLabel = 'medium';
-  
+
   return {
     isValid: password.length >= minLength,
     strength: strengthLabel,
