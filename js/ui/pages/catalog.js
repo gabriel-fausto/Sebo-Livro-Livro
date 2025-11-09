@@ -3,6 +3,11 @@
  * Livro&Livro - Book Exchange Platform
  */
 
+
+import { 
+  consultaLivros
+} from "../../services/books-service.js";
+
 async function getBase64Image(imgURL) {
     const img = await loadImage(imgURL);
     var canvas = document.createElement("canvas");
@@ -32,13 +37,12 @@ async function loadImage(imgURL) {
 
 // Initialize books in localStorage if empty
 async function initializeBooks() {
-  const url = `https://6tq0bqkysh.execute-api.sa-east-1.amazonaws.com/dev/books`;
-    
-    // Faz a chamada na API
-    const resposta = await fetch(url);
-    const dados = await resposta.json();
-  if (dados) {
-    localStorage.setItem('books', JSON.stringify(dados));
+  if(localStorage.getItem('books')) 
+    return;
+  
+  const books = await consultaLivros();
+  if (books) {
+    localStorage.setItem('books', JSON.stringify(books));
   }
 }
 
