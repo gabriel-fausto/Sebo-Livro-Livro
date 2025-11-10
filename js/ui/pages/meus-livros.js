@@ -159,9 +159,9 @@ window.deleteBookConfirm = async function (bookId) {
   }
 };
 
-// Edit book function (placeholder for now)
+// Edit book function
 window.editBook = function (bookId) {
-  alert('Funcionalidade de edição em desenvolvimento. ID do livro: ' + bookId);
+  window.location.href = `editar-livro.html?id=${bookId}`;
 };
 
 // Initialize

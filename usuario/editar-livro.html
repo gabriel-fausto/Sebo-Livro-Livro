@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cadastre um livro para troca ou doação - Livro&Livro">
-  <title>Cadastrar Livro - Livro&Livro</title>
+  <meta name="description" content="Editar livro - Livro&Livro">
+  <title>Editar Livro - Livro&Livro</title>
 
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -63,8 +63,8 @@
   <main id="main-content" role="main">
     <div class="dashboard-header">
       <div class="container">
-        <h1 class="dashboard-welcome">Cadastrar Livro</h1>
-        <p class="dashboard-subtitle">Compartilhe seus livros com outros leitores</p>
+        <h1 class="dashboard-welcome">Editar Livro</h1>
+        <p class="dashboard-subtitle">Atualize as informações do seu livro</p>
       </div>
     </div>
 
@@ -81,10 +81,10 @@
                   <a href="painel.html" class="sidebar-nav-link">Dados Pessoais</a>
                 </li>
                 <li class="sidebar-nav-item">
-                  <a href="cadastrar-livro.html" class="sidebar-nav-link active">Cadastrar Livro</a>
+                  <a href="cadastrar-livro.html" class="sidebar-nav-link">Cadastrar Livro</a>
                 </li>
                 <li class="sidebar-nav-item">
-                  <a href="meus-livros.html" class="sidebar-nav-link">Meus Livros</a>
+                  <a href="meus-livros.html" class="sidebar-nav-link active">Meus Livros</a>
                 </li>
                 <li class="sidebar-nav-item">
                   <a href="pedidos.html" class="sidebar-nav-link">Meus Pedidos</a>
@@ -159,19 +159,24 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="image" class="form-label">Imagem do Livro *</label>
-                    <input type="file" id="image" name="image" class="form-input" accept="image/*" required>
+                    <label for="image" class="form-label">Imagem do Livro</label>
+                    <input type="file" id="image" name="image" class="form-input" accept="image/*">
                     <p style="font-size: var(--font-size-sm); color: var(--color-text-light); margin-top: var(--space-2);">
-                      Tamanho máximo: 250KB
+                      Deixe em branco para manter a imagem atual. Tamanho máximo: 250KB
                     </p>
+                    <div id="current-image" style="margin-top: var(--space-3);">
+                      <p style="font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--space-2);">Imagem atual:</p>
+                      <img id="current-img" src="" alt="Imagem atual" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
+                    </div>
                     <div id="image-preview" style="margin-top: var(--space-3); display: none;">
+                      <p style="font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--space-2);">Nova imagem:</p>
                       <img id="preview-img" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
                     </div>
                   </div>
 
                   <div class="flex gap-4">
-                    <button type="submit" class="btn btn-primary">Cadastrar Livro</button>
-                    <a href="painel.html" class="btn btn-outline">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    <a href="meus-livros.html" class="btn btn-outline">Cancelar</a>
                   </div>
                 </form>
               </div>
@@ -190,7 +195,7 @@
     </div>
   </footer>
 
-  <script type="module" src="../js/ui/pages/cadastrar-livro.js"></script>
+  <script type="module" src="../js/ui/pages/editar-livro.js"></script>
   <script type="module" src="../js/main.js"></script>
 </body>
 

@@ -95,3 +95,25 @@ export async function deleteBook(idLivro) {
         throw new Error('Erro ao excluir livro');
     }
 }
+
+/**
+ * Faz upload de imagem para S3 usando PreSignedURL
+ * @param {string} preSignedURL - URL pré-assinada do S3
+ * @param {File} imageFile - Arquivo de imagem a ser enviado
+ * @returns {boolean} - true se upload bem sucedido
+ */
+export async function uploadImageToS3(preSignedURL, imageFile) {
+    const resposta = await fetch(preSignedURL, {
+        method: 'PUT',
+        body: imageFile,
+        headers: {
+            'Content-Type': imageFile.type
+        }
+    });
+
+    if (resposta.ok) {
+        return true;
+    } else {
+        throw new Error('Erro ao fazer upload da imagem');
+    }
+}
