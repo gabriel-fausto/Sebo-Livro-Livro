@@ -113,7 +113,7 @@ function displayBooks(books) {
         <div style="margin: var(--space-4) 0;">
           <span class="badge badge-primary">${categoryLabels[book.category] || book.category}</span>
           <span class="badge badge-secondary">${book.condition}</span>
-          <span class="badge ${book.type === 'Doação' ? 'badge-success' : 'badge-info'}">${book.type}</span>
+          <span class="badge ${book.type === 'doacao' ? 'badge-success' : 'badge-info'}">${book.type}</span>
         </div>
 
         ${book.description ? `<p class="book-card-description" style="font-size: var(--font-size-sm); color: var(--color-text-light); margin: var(--space-3) 0;">${book.description}</p>` : ''}
