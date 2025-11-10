@@ -8,14 +8,31 @@ import {
   consultaLivros
 } from "../../services/books-service.js";
 
-// Initialize books in localStorage if empty
-async function initializeBooks() {
-  if (localStorage.getItem('books'))
-    return;
+// Timeout em minutos
+const BOOKS_TIMEOUT_MINUTES = 60;
 
-  const books = await consultaLivros();
-  if (books) {
-    localStorage.setItem('books', JSON.stringify(books));
+// Initialize books in localStorage if empty or expired
+async function initializeBooks() {
+  const books = localStorage.getItem('books');
+  const booksTimeout = localStorage.getItem('booksTimeout');
+  const now = Date.now();
+
+  // Verifica se livros estão ausentes, em branco ou timeout expirou
+  if (
+    !books ||
+    books === '[]' ||
+    !booksTimeout ||
+    now - Number(booksTimeout) > BOOKS_TIMEOUT_MINUTES * 60 * 1000
+  ) {
+    const freshBooks = await consultaLivros();
+    if (freshBooks) {
+      localStorage.setItem('books', JSON.stringify(freshBooks));
+      localStorage.setItem('booksTimeout', String(now));
+    } else {
+      // Limpa caso não consiga carregar
+      localStorage.removeItem('books');
+      localStorage.removeItem('booksTimeout');
+    }
   }
 }
 

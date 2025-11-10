@@ -37,6 +37,9 @@ if (logoutBtnMobile) {
   logoutBtnMobile.addEventListener('click', logout);
 }
 
+// Timeout em minutos
+const BOOKS_TIMEOUT_MINUTES = 60;
+
 // Load books
 async function loadBooks() {
   const loadingMessage = document.getElementById('loading-message');
@@ -46,16 +49,28 @@ async function loadBooks() {
   try {
     // Check if books are already in localStorage
     let books = localStorage.getItem('books');
-    
-    if (!books) {
-      // Fetch from API if not in localStorage
-      const booksData = await getAllBooks();
-      books = JSON.stringify(booksData);
-      localStorage.setItem('books', books);
+    const booksTimeout = localStorage.getItem('booksTimeout');
+    const now = Date.now();
+
+    if (
+      !books ||
+      books === '[]' ||
+      !booksTimeout ||
+      now - Number(booksTimeout) > BOOKS_TIMEOUT_MINUTES * 60 * 1000
+    ) {
+      const freshBooks = await consultaLivros();
+      if (freshBooks) {
+        localStorage.setItem('books', JSON.stringify(freshBooks));
+        localStorage.setItem('booksTimeout', String(now));
+      } else {
+        // Limpa caso não consiga carregar
+        localStorage.removeItem('books');
+        localStorage.removeItem('booksTimeout');
+      }
     }
 
     const allBooks = JSON.parse(books);
-    
+
     // Filter books by user's bookIDs
     const userBookIDs = user.bookIDs || [];
     const userBooks = allBooks.filter(book => userBookIDs.includes(book.id));
@@ -77,7 +92,7 @@ async function loadBooks() {
 // Display books in grid
 function displayBooks(books) {
   const booksGrid = document.getElementById('books-grid');
-  
+
   const categoryLabels = {
     'ficcao': 'Ficção',
     'nao-ficcao': 'Não-Ficção',
@@ -117,7 +132,7 @@ function displayBooks(books) {
 }
 
 // Delete book function
-window.deleteBookConfirm = async function(bookId) {
+window.deleteBookConfirm = async function (bookId) {
   if (!confirm('Tem certeza que deseja excluir este livro?')) {
     return;
   }
@@ -135,7 +150,7 @@ window.deleteBookConfirm = async function(bookId) {
     localStorage.setItem('books', JSON.stringify(books));
 
     alert('Livro excluído com sucesso!');
-    
+
     // Reload the page
     window.location.reload();
   } catch (error) {
@@ -145,7 +160,7 @@ window.deleteBookConfirm = async function(bookId) {
 };
 
 // Edit book function (placeholder for now)
-window.editBook = function(bookId) {
+window.editBook = function (bookId) {
   alert('Funcionalidade de edição em desenvolvimento. ID do livro: ' + bookId);
 };
 
