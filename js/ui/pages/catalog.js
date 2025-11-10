@@ -4,42 +4,15 @@
  */
 
 
-import { 
+import {
   consultaLivros
 } from "../../services/books-service.js";
 
-async function getBase64Image(imgURL) {
-    const img = await loadImage(imgURL);
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
-
-async function loadImage(imgURL) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-
-    img.onload = () => {
-      resolve(img);
-    };
-
-    img.onerror = (error) => {
-      reject(new Error('Falha ao carregar imagem'));
-    };
-
-    img.src = imgURL;
-  });
-}
-
 // Initialize books in localStorage if empty
 async function initializeBooks() {
-  if(localStorage.getItem('books')) 
+  if (localStorage.getItem('books'))
     return;
-  
+
   const books = await consultaLivros();
   if (books) {
     localStorage.setItem('books', JSON.stringify(books));
@@ -97,17 +70,17 @@ function filterBooks(books) {
     if (currentFilters.category !== 'todos' && book.category !== currentFilters.category) {
       return false;
     }
-    
+
     // Condition filter
     if (currentFilters.conditions.length > 0 && !currentFilters.conditions.includes(book.condition)) {
       return false;
     }
-    
+
     // Type filter
     if (currentFilters.types.length > 0 && !currentFilters.types.includes(book.type)) {
       return false;
     }
-    
+
     // Search filter
     if (currentFilters.search) {
       const searchLower = currentFilters.search.toLowerCase();
@@ -117,7 +90,7 @@ function filterBooks(books) {
         book.isbn.includes(searchLower)
       );
     }
-    
+
     return true;
   });
 }
@@ -125,7 +98,7 @@ function filterBooks(books) {
 // Sort books
 function sortBooks(books) {
   const sorted = [...books];
-  
+
   switch (currentSort) {
     case 'recent':
       sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -143,7 +116,7 @@ function sortBooks(books) {
       sorted.sort((a, b) => b.author.localeCompare(a.author));
       break;
   }
-  
+
   return sorted;
 }
 
@@ -180,20 +153,20 @@ function renderBookCard(book) {
 // Render books
 function renderBooks() {
   loadingState.style.display = 'none';
-  
+
   const allBooks = getBooks();
   const filtered = filterBooks(allBooks);
   const sorted = sortBooks(filtered);
-  
+
   resultCount.textContent = `Mostrando ${sorted.length} ${sorted.length === 1 ? 'livro' : 'livros'}`;
-  
+
   if (sorted.length === 0) {
     booksGrid.innerHTML = '';
     emptyState.style.display = 'block';
   } else {
     emptyState.style.display = 'none';
     booksGrid.innerHTML = sorted.map(book => renderBookCard(book)).join('');
-    
+
     // Add event listeners to "Gostaria de Ler" buttons
     booksGrid.querySelectorAll('button[data-book-id]').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -208,25 +181,25 @@ function renderBooks() {
 function addToCart(bookId) {
   const currentUser = localStorage.getItem('currentUser');
   const basePath = window.location.hostname.includes('github.io')
-      ? '/Sebo-Livro-Livro'
-      : '';
+    ? '/Sebo-Livro-Livro'
+    : '';
   if (!currentUser) {
     alert('Você precisa estar logado para adicionar livros ao carrinho.');
     window.location.href = `${basePath}/auth/login.html`;
     return;
   }
-  
+
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  
+
   // Check if book is already in cart
   if (cart.includes(bookId)) {
     alert('Este livro já está no seu carrinho!');
     return;
   }
-  
+
   cart.push(bookId);
   localStorage.setItem('cart', JSON.stringify(cart));
-  
+
   alert('Livro adicionado ao carrinho!');
 }
 
@@ -280,11 +253,11 @@ clearFiltersBtn.addEventListener('click', () => {
     types: [],
     search: ''
   };
-  
+
   // Reset category chips
   categoryChips.forEach(c => c.classList.remove('active'));
   categoryChips[0].classList.add('active');
-  
+
   updateURL('todos');
   renderBooks();
 });

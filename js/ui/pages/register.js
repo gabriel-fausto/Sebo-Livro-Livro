@@ -16,6 +16,8 @@ import {
   validateRequired
 } from '../../utils/validators.js';
 
+import { register, updateUser, isEmailAvailable } from '../../services/auth-service.js';
+
 const form = document.getElementById('register-form');
 const passwordInput = document.getElementById('password');
 const passwordStrengthBar = document.getElementById('password-strength-bar');
@@ -36,7 +38,7 @@ const fields = {
   neighborhood: document.getElementById('neighborhood'),
   password: passwordInput,
   confirmPassword: document.getElementById('confirmPassword'),
-  terms: document.getElementById('terms')
+  terms: document.getElementById('terms'),
 };
 
 // Error span references
@@ -122,7 +124,7 @@ function clearErrors() {
   });
 }
 
-function validateForm() {
+async function validateForm() {
   clearErrors();
   let isValid = true;
 
@@ -161,9 +163,7 @@ function validateForm() {
     showError('email', 'E-mail inválido');
     isValid = false;
   } else {
-    // Check if email already exists
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.some(u => u.email === fields.email.value)) {
+    if (!await isEmailAvailable(fields.email.value)) {
       showError('email', 'Este e-mail já está cadastrado');
       isValid = false;
     }
@@ -254,10 +254,10 @@ function validateForm() {
   return isValid;
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  if (!validateForm()) {
+  if (!await validateForm()) {
     // Scroll to first error
     const firstError = document.querySelector('.form-input-error, .form-select-error');
     if (firstError) {
@@ -271,7 +271,6 @@ form.addEventListener('submit', (e) => {
   const genres = Array.from(genreCheckboxes).map(cb => cb.value);
 
   const userData = {
-    id: Date.now().toString(),
     name: fields.name.value.trim(),
     cpf: fields.cpf.value,
     birthDate: fields.birthDate.value,
@@ -284,24 +283,21 @@ form.addEventListener('submit', (e) => {
       street: fields.street.value.trim(),
       number: fields.number.value.trim(),
       complement: fields.complement.value.trim(),
-      neighborhood: fields.neighborhood.value.trim()
+      neighborhood: fields.neighborhood.value.trim(),
+      booksID: []
     },
     preferences: {
       genres: genres
-    },
-    password: fields.password.value,
-    createdAt: new Date().toISOString(),
-    isAdmin: false
+    }
   };
 
-  // Save to localStorage
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-  users.push(userData);
-  localStorage.setItem('users', JSON.stringify(users));
-
-  // Auto login - store current user (without password)
-  const { password, ...userWithoutPassword } = userData;
-  localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
+  if ((await register(userData.name, userData.email, fields.password.value))) {
+    localStorage.setItem('currentUser', JSON.stringify(await updateUser(userData)));
+  }
+  else {
+    alert('Erro ao realizar cadastro. Por favor, tente novamente mais tarde.');
+    return;
+  }
 
   // Show success message
   alert('Cadastro realizado com sucesso! Você será redirecionado para o painel.');

@@ -3,6 +3,8 @@
  * Livro&Livro - Book Exchange Platform
  */
 
+import { updateUser } from '../../services/auth-service.js';
+
 // Check if user is logged in
 function checkAuth() {
   const currentUser = localStorage.getItem('currentUser');
@@ -121,7 +123,7 @@ cancelBtn.addEventListener('click', () => {
   cancelBtn.style.display = 'none';
 });
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   if (!isEditing) return;
@@ -142,16 +144,7 @@ form.addEventListener('submit', (e) => {
     }
   };
 
-  // Update in localStorage
-  localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-
-  // Update in users array
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-  const userIndex = users.findIndex(u => u.id === user.id);
-  if (userIndex !== -1) {
-    users[userIndex] = { ...users[userIndex], ...updatedUser };
-    localStorage.setItem('users', JSON.stringify(users));
-  }
+  localStorage.setItem('currentUser', JSON.stringify(await updateUser(updatedUser)));
 
   // Disable fields
   formInputs.forEach(input => {

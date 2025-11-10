@@ -7,8 +7,7 @@ const url = `https://6tq0bqkysh.execute-api.sa-east-1.amazonaws.com/dev/`;
  */
 export async function consultaLivros() {
     // Faz a chamada na API
-    const resposta = await fetch(`${url}/books/`);
+    const resposta = await fetch(`${url}books/`);
     const dados = await resposta.json();
-
     return dados;
 }

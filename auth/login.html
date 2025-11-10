@@ -143,13 +143,9 @@
 
       if (hasError) return;
 
-      // Simulate login (MVP - check localStorage)
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
       const user = await login(email, password);
 
       if (user) {
-        // Store current user (without password)
-        //const { password: _, ...userWithoutPassword } = user;
         localStorage.setItem('currentUser', JSON.stringify(user));
 
         showAlert('Login realizado com sucesso!', 'success');
