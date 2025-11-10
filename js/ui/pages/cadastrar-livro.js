@@ -106,10 +106,8 @@ form.addEventListener('submit', async (e) => {
   }
 
   try {
-    // Add image object with imageFileName to bookData
-    bookData.image = {
-      imageFileName: imageFile.name
-    };
+    // Add imageFileName to bookData
+    bookData.imageFileName = imageFile.name;
 
     // Create book via API
     const newBook = await createBook(user.email, bookData);

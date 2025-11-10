@@ -136,10 +136,8 @@ form.addEventListener('submit', async (e) => {
       return;
     }
 
-    // Add image object with imageFileName to bookData if image was changed
-    bookData.image = {
-      imageFileName: imageFile.name
-    };
+    // Add imageFileName to bookData if image was changed
+    bookData.imageFileName = imageFile.name;
   }
 
   try {
