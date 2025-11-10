@@ -284,7 +284,7 @@ form.addEventListener('submit', async (e) => {
       number: fields.number.value.trim(),
       complement: fields.complement.value.trim(),
       neighborhood: fields.neighborhood.value.trim(),
-      booksID: []
+      bookIDs: []
     },
     preferences: {
       genres: genres
