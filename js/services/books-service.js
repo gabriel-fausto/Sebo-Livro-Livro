@@ -19,7 +19,7 @@ export async function consultaLivros() {
  * @returns {object} book - Livro criado com ID gerado
  */
 export async function createBook(email, bookData) {
-    const resposta = await fetch(`${url}books/${email}`, {
+    const resposta = await fetch(`${url}books/${encodeURIComponent(email)}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -48,8 +48,8 @@ export async function getAllBooks() {
  * @returns {object} book - Livro encontrado
  */
 export async function getBookById(idLivro) {
-    const resposta = await fetch(`${url}books/${idLivro}`);
-    
+    const resposta = await fetch(`${url}books/${encodeURIComponent(idLivro)}`);
+
     if (resposta.status === 200) {
         return await resposta.json();
     } else {
@@ -64,7 +64,7 @@ export async function getBookById(idLivro) {
  * @returns {object} book - Livro atualizado
  */
 export async function updateBook(idLivro, bookData) {
-    const resposta = await fetch(`${url}books/${idLivro}`, {
+    const resposta = await fetch(`${url}books/${encodeURIComponent(idLivro)}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ export async function updateBook(idLivro, bookData) {
  * @returns {boolean} - true se exclusão bem sucedida
  */
 export async function deleteBook(idLivro) {
-    const resposta = await fetch(`${url}books/${idLivro}`, {
+    const resposta = await fetch(`${url}books/${encodeURIComponent(idLivro)}`, {
         method: 'DELETE'
     });
 
@@ -93,5 +93,28 @@ export async function deleteBook(idLivro) {
         return true;
     } else {
         throw new Error('Erro ao excluir livro');
+    }
+}
+
+/**
+ * Faz upload de imagem para S3 usando PreSignedURL
+ * @param {string} preSignedURL - URL pré-assinada do S3
+ * @param {File} imageFile - Arquivo de imagem a ser enviado
+ * @returns {boolean} - true se upload bem sucedido
+ */
+export async function uploadImageToS3(preSignedURL, imageFile) {
+    const resposta = await fetch(preSignedURL, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': imageFile.type
+        },
+        body: imageFile
+    });
+
+    if (resposta.ok) {
+        return true;
+    } else {
+        console.error('Erro no upload:', resposta.status, await resposta.text());
+        throw new Error('Erro ao fazer upload da imagem');
     }
 }

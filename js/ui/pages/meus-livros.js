@@ -58,7 +58,7 @@ async function loadBooks() {
       !booksTimeout ||
       now - Number(booksTimeout) > BOOKS_TIMEOUT_MINUTES * 60 * 1000
     ) {
-      const freshBooks = await consultaLivros();
+      const freshBooks = await getAllBooks();
       if (freshBooks) {
         localStorage.setItem('books', JSON.stringify(freshBooks));
         localStorage.setItem('booksTimeout', String(now));
@@ -113,7 +113,7 @@ function displayBooks(books) {
         <div style="margin: var(--space-4) 0;">
           <span class="badge badge-primary">${categoryLabels[book.category] || book.category}</span>
           <span class="badge badge-secondary">${book.condition}</span>
-          <span class="badge ${book.type === 'Doação' ? 'badge-success' : 'badge-info'}">${book.type}</span>
+          <span class="badge ${book.type === 'doacao' ? 'badge-success' : 'badge-info'}">${book.type}</span>
         </div>
 
         ${book.description ? `<p class="book-card-description" style="font-size: var(--font-size-sm); color: var(--color-text-light); margin: var(--space-3) 0;">${book.description}</p>` : ''}
@@ -159,9 +159,9 @@ window.deleteBookConfirm = async function (bookId) {
   }
 };
 
-// Edit book function (placeholder for now)
+// Edit book function
 window.editBook = function (bookId) {
-  alert('Funcionalidade de edição em desenvolvimento. ID do livro: ' + bookId);
+  window.location.href = `editar-livro.html?id=${bookId}`;
 };
 
 // Initialize
