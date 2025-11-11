@@ -1,9 +1,9 @@
 /**
- * CADASTRAR-LIVRO.JS - Book registration logic
+ * EDITAR-LIVRO.JS - Book editing logic
  * Livro&Livro - Book Exchange Platform
  */
 
-import { createBook, uploadImageToS3 } from '../../services/books-service.js';
+import { updateBook, getBookById, uploadImageToS3 } from '../../services/books-service.js';
 
 // Check if user is logged in
 function checkAuth() {
@@ -37,10 +37,21 @@ if (logoutBtnMobile) {
   logoutBtnMobile.addEventListener('click', logout);
 }
 
+// Get book ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const bookId = urlParams.get('id');
+
+if (!bookId) {
+  alert('ID do livro não encontrado.');
+  window.location.href = 'meus-livros.html';
+}
+
 // Image preview handling
 const imageInput = document.getElementById('image');
 const imagePreview = document.getElementById('image-preview');
 const previewImg = document.getElementById('preview-img');
+const currentImage = document.getElementById('current-image');
+const currentImg = document.getElementById('current-img');
 
 imageInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
@@ -67,7 +78,33 @@ imageInput.addEventListener('change', (e) => {
   reader.readAsDataURL(file);
 });
 
-// Book registration form
+// Load book data
+async function loadBookData() {
+  try {
+    const book = await getBookById(bookId);
+
+    // Populate form fields
+    document.getElementById('title').value = book.title || '';
+    document.getElementById('author').value = book.author || '';
+    document.getElementById('category').value = book.category || '';
+    document.getElementById('condition').value = book.condition || '';
+    document.getElementById('type').value = book.type || '';
+    document.getElementById('description').value = book.description || '';
+
+    // Show current image
+    if (book.preSignedURL) {
+      currentImg.src = book.preSignedURL;
+      currentImg.alt = book.imageFileName || '';
+      currentImage.style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Erro ao carregar dados do livro:', error);
+    alert('Erro ao carregar dados do livro. Redirecionando...');
+    window.location.href = 'meus-livros.html';
+  }
+}
+
+// Book edit form
 const form = document.getElementById('book-registration-form');
 
 form.addEventListener('submit', async (e) => {
@@ -75,6 +112,7 @@ form.addEventListener('submit', async (e) => {
 
   // Get form data
   const bookData = {
+    id: bookId,
     title: document.getElementById('title').value.trim(),
     author: document.getElementById('author').value.trim(),
     category: document.getElementById('category').value,
@@ -83,7 +121,7 @@ form.addEventListener('submit', async (e) => {
     description: document.getElementById('description').value.trim()
   };
 
-  // Get image file
+  // Get image file if user selected a new one
   const imageFile = imageInput.files[0];
 
   // Validate required fields
@@ -92,53 +130,47 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  // Validate image
-  if (!imageFile) {
-    alert('Por favor, selecione uma imagem para o livro.');
-    return;
-  }
+  // Validate image size if a new image was selected
+  if (imageFile) {
+    const maxSize = 250 * 1024; // 250KB in bytes
+    if (imageFile.size > maxSize) {
+      alert('A imagem deve ter no máximo 250KB. Por favor, selecione uma imagem menor.');
+      return;
+    }
 
-  // Validate image size again (in case validation was bypassed)
-  const maxSize = 250 * 1024; // 250KB in bytes
-  if (imageFile.size > maxSize) {
-    alert('A imagem deve ter no máximo 250KB. Por favor, selecione uma imagem menor.');
-    return;
+    // Add imageFileName to bookData if image was changed
+    bookData.imageFileName = imageFile.name;
+  }
+  else {
+    bookData.imageFileName = currentImg.alt;
   }
 
   try {
-    // Add imageFileName to bookData
-    bookData.imageFileName = imageFile.name;
+    // Update book via API
+    const updatedBook = await updateBook(bookId, bookData);
 
-    // Create book via API
-    const newBook = await createBook(user.email, bookData);
-
-    // Upload image to S3 using PreSignedURL
-    if (newBook.preSignedURL) {
-      await uploadImageToS3(newBook.preSignedURL, imageFile);
+    // Upload new image to S3 if user selected a new image
+    if (imageFile && updatedBook.preSignedURL) {
+      await uploadImageToS3(updatedBook.preSignedURL, imageFile);
     }
-
-    // Update user's bookIDs in currentUser
-    if (!user.bookIDs) {
-      user.bookIDs = [];
-    }
-    user.bookIDs.push(newBook.id);
-    localStorage.setItem('currentUser', JSON.stringify(user));
 
     // Update books list in localStorage
-    let books = [];
-    const storedBooks = localStorage.getItem('books');
-    if (storedBooks) {
-      books = JSON.parse(storedBooks);
+    let books = JSON.parse(localStorage.getItem('books') || '[]');
+    const bookIndex = books.findIndex(b => b.id === bookId);
+    if (bookIndex !== -1) {
+      books[bookIndex] = updatedBook;
+      localStorage.setItem('books', JSON.stringify(books));
     }
-    books.push(newBook);
-    localStorage.setItem('books', JSON.stringify(books));
 
-    alert('Livro cadastrado com sucesso!');
-    
+    alert('Livro atualizado com sucesso!');
+
     // Redirect to "Meus Livros" page
     window.location.href = 'meus-livros.html';
   } catch (error) {
-    console.error('Erro ao cadastrar livro:', error);
-    alert('Erro ao cadastrar livro. Por favor, tente novamente.');
+    console.error('Erro ao atualizar livro:', error);
+    alert('Erro ao atualizar livro. Por favor, tente novamente.');
   }
 });
+
+// Initialize
+loadBookData();
