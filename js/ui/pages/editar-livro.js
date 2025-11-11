@@ -82,7 +82,7 @@ imageInput.addEventListener('change', (e) => {
 async function loadBookData() {
   try {
     const book = await getBookById(bookId);
-    
+
     // Populate form fields
     document.getElementById('title').value = book.title || '';
     document.getElementById('author').value = book.author || '';
@@ -90,10 +90,11 @@ async function loadBookData() {
     document.getElementById('condition').value = book.condition || '';
     document.getElementById('type').value = book.type || '';
     document.getElementById('description').value = book.description || '';
-    
+
     // Show current image
     if (book.preSignedURL) {
       currentImg.src = book.preSignedURL;
+      currentImg.alt = book.imageFileName || '';
       currentImage.style.display = 'block';
     }
   } catch (error) {
@@ -111,6 +112,7 @@ form.addEventListener('submit', async (e) => {
 
   // Get form data
   const bookData = {
+    id: bookId,
     title: document.getElementById('title').value.trim(),
     author: document.getElementById('author').value.trim(),
     category: document.getElementById('category').value,
@@ -139,6 +141,9 @@ form.addEventListener('submit', async (e) => {
     // Add imageFileName to bookData if image was changed
     bookData.imageFileName = imageFile.name;
   }
+  else {
+    bookData.imageFileName = currentImg.alt;
+  }
 
   try {
     // Update book via API
@@ -158,7 +163,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     alert('Livro atualizado com sucesso!');
-    
+
     // Redirect to "Meus Livros" page
     window.location.href = 'meus-livros.html';
   } catch (error) {

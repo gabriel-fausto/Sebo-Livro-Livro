@@ -58,7 +58,7 @@ async function loadBooks() {
       !booksTimeout ||
       now - Number(booksTimeout) > BOOKS_TIMEOUT_MINUTES * 60 * 1000
     ) {
-      const freshBooks = await consultaLivros();
+      const freshBooks = await getAllBooks();
       if (freshBooks) {
         localStorage.setItem('books', JSON.stringify(freshBooks));
         localStorage.setItem('booksTimeout', String(now));
