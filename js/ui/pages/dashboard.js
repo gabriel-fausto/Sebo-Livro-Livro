@@ -38,7 +38,7 @@ function loadStats() {
 
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
-  document.getElementById('stat-books-donated').textContent = userBooks.length;
+  document.getElementById('stat-books-donated').textContent = user.bookIDs.length;
   document.getElementById('stat-books-received').textContent =
     userOrders.filter(o => o.status === 'concluido').length;
   document.getElementById('stat-pending-orders').textContent = pendingOrders.length;
