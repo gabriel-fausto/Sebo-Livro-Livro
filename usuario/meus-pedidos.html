@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Meus livros postados - Livro&Livro">
-  <title>Livros postados - Livro&Livro</title>
+  <meta name="description" content="Meus pedidos - Livro&Livro">
+  <title>Meus Pedidos - Livro&Livro</title>
 
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/layout.css">
@@ -63,8 +63,8 @@
   <main id="main-content" role="main">
     <div class="dashboard-header">
       <div class="container">
-        <h1 class="dashboard-welcome">Livros Postados</h1>
-        <p class="dashboard-subtitle">Gerencie seus livros postados</p>
+        <h1 class="dashboard-welcome">Meus Pedidos</h1>
+        <p class="dashboard-subtitle">Acompanhe o histórico dos seus pedidos</p>
       </div>
     </div>
 
@@ -84,10 +84,10 @@
                   <a href="cadastrar-livro.html" class="sidebar-nav-link">Cadastrar Livro</a>
                 </li>
                 <li class="sidebar-nav-item">
-                  <a href="meus-livros.html" class="sidebar-nav-link active">Livros Postados</a>
+                  <a href="meus-livros.html" class="sidebar-nav-link">Livros Postados</a>
                 </li>
                 <li class="sidebar-nav-item">
-                  <a href="meus-pedidos.html" class="sidebar-nav-link">Meus Pedidos</a>
+                  <a href="meus-pedidos.html" class="sidebar-nav-link active">Meus Pedidos</a>
                 </li>
                 <li class="sidebar-nav-item">
                   <a href="carrinho.html" class="sidebar-nav-link">Carrinho</a>
@@ -98,31 +98,15 @@
 
           <!-- Main Content -->
           <div>
-            <!-- Quick Action -->
-            <div style="margin-bottom: var(--space-6);">
-              <a href="cadastrar-livro.html" class="btn btn-primary">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
-                  style="margin-right: 8px;">
-                  <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                </svg>
-                Cadastrar Novo Livro
-              </a>
-            </div>
-
-            <!-- Books Grid -->
+            <!-- Orders Section -->
             <section class="card">
               <div class="card-header">
-                <h2 style="margin: 0; font-size: var(--font-size-xl);">Meus Anúncios</h2>
+                <h2 style="margin: 0; font-size: var(--font-size-xl);">Histórico de Pedidos</h2>
               </div>
               <div class="card-body">
-                <div id="loading-message" style="text-align: center; padding: var(--space-8);">
-                  <p>Carregando seus livros...</p>
+                <div style="text-align: center; padding: var(--space-8);">
+                  <p style="color: var(--color-gray-medium);">Você ainda não fez nenhum pedido.</p>
                 </div>
-                <div id="empty-message" style="display: none; text-align: center; padding: var(--space-8);">
-                  <p style="margin-bottom: var(--space-4);">Você ainda não cadastrou nenhum livro.</p>
-                  <a href="cadastrar-livro.html" class="btn btn-accent">Cadastrar Primeiro Livro</a>
-                </div>
-                <div id="books-grid" class="grid grid-cols-1 md:grid-cols-2" style="display: none;"></div>
               </div>
             </section>
           </div>
@@ -139,7 +123,6 @@
     </div>
   </footer>
 
-  <script type="module" src="../js/ui/pages/meus-livros.js"></script>
   <script type="module" src="../js/main.js"></script>
 </body>
 
