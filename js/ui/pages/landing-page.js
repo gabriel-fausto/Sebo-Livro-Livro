@@ -1,3 +1,5 @@
+import { addToCart as addBookToCart } from "../../services/cart-service.js";
+
 const booksGrid = document.getElementById('books-grid');
 
 // Get condition label
@@ -13,29 +15,18 @@ function getConditionLabel(condition) {
 
 // Add to cart
 function addToCart(bookId) {
-  const currentUser = localStorage.getItem('currentUser');
-  const basePath = window.location.hostname.includes('github.io')
+  const result = addBookToCart(bookId);
+  
+  if (result.requiresLogin) {
+    const basePath = window.location.hostname.includes('github.io')
       ? '/Sebo-Livro-Livro'
       : '';
-  
-  if (!currentUser) {
-    alert('Você precisa estar logado para adicionar livros ao carrinho.');
+    alert(result.message);
     window.location.href = `${basePath}/auth/login.html`;
     return;
   }
-  
-  const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  
-  // Check if book is already in cart
-  if (cart.includes(bookId)) {
-    alert('Este livro já está no seu carrinho!');
-    return;
-  }
-  
-  cart.push(bookId);
-  localStorage.setItem('cart', JSON.stringify(cart));
-  
-  alert('Livro adicionado ao carrinho!');
+
+  alert(result.message);
 }
 
 // Render book card
