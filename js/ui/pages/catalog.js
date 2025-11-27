@@ -104,8 +104,7 @@ function filterBooks(books) {
       const searchLower = currentFilters.search.toLowerCase();
       return (
         book.title.toLowerCase().includes(searchLower) ||
-        book.author.toLowerCase().includes(searchLower) ||
-        book.isbn.includes(searchLower)
+        book.author.toLowerCase().includes(searchLower)
       );
     }
 
@@ -198,7 +197,7 @@ function renderBooks() {
 // Add to cart
 function addToCart(bookId) {
   const result = addBookToCart(bookId);
-  
+
   if (result.requiresLogin) {
     const basePath = window.location.hostname.includes('github.io')
       ? '/Sebo-Livro-Livro'
